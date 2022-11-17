@@ -62,10 +62,16 @@ def find_afterparties():
 
     res = requests.get(url, params=payload)
     data = res.json() # this is a dictionary
-    print(data['_embedded']['events'])
-    
-
+    #print(data['_embedded']['events'][0]['name'])
     events = []
+    # i want the name of the events 
+    embedded_dict = data['_embedded'] # -> this is a dictionary
+    events_list = embedded_dict['events'] # this is a list of event dictionaries
+    # for each event dictionary i want just the name
+    for event in events_list:
+        events.append(event)
+
+    
 
     return render_template('search-results.html',
                            pformat=pformat,
