@@ -60,18 +60,18 @@ def find_afterparties():
     payload['unit'] = unit
     payload['sort'] = sort
 
-    res = requests.get(url, params=payload)
+    res = requests.get(url, params=payload) # reqeust the info from the api
     data = res.json() # this is a dictionary
-    #print(data['_embedded']['events'][0]['name'])
+
     events = []
     # i want the name of the events 
     embedded_dict = data['_embedded'] # -> this is a dictionary
     events_list = embedded_dict['events'] # this is a list of event dictionaries
-    # for each event dictionary i want just the name
+    # for each event dictionary i want to add it to the events list
     for event in events_list:
         events.append(event)
 
-    
+    # when events list is passed to the render template, the template will get the name
 
     return render_template('search-results.html',
                            pformat=pformat,
